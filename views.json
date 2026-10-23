@@ -10,7 +10,7 @@
       },
       {
         "title": "Budget exceptions",
-        "sql": "select * from budget_review where finding<>'within budget' order by month,centre"
+        "sql": "select month,centre,currency,budget_amount,actual_amount,variance_amount,finding from budget_review where finding<>'within budget' order by month,centre"
       },
       {
         "title": "Attention",

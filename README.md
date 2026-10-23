@@ -30,7 +30,7 @@ The fictional Kauri demo includes a compute increase, shared database costs spli
 
 Monday: /weekly-review brings together /showback, /budget-review, /cost-changes, /attention and /allocation-check. Before assigning the bill: /unallocated and /allocate. At the review: /add-action and /log. After investigating: /close-action requires evidence. /draft-review and /draft-owner write local drafts and never send.
 
-Run `npm run costs -- help` for commands and required options. Every command accepts --json. Exact codes, case-insensitive names and partial UUIDs work for centre and action references. Ambiguous matches list candidates and exit with failure.
+31 CLI commands and 35 slash-command recipes cover the recurring jobs. Run `npm run costs -- help` for commands and required options. Every command accepts --json. Exact codes, case-insensitive names and partial UUIDs work for centre and action references. Ambiguous matches list candidates and exit with failure.
 
 ## Costs that reconcile
 
