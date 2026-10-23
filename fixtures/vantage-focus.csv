@@ -1,0 +1,4 @@
+ChargePeriodStart,ChargePeriodEnd,ProviderName,BillingAccountId,ServiceName,ResourceId,BillingCurrency,BilledCost,EffectiveCost,ChargeCategory,Tags
+2026-01-01T00:00:00Z,2026-01-02T00:00:00Z,AWS,fixture-account,Compute,worker-1,USD,100.123456,80.123456,Usage,"{""team"":""example""}"
+2026-01-01T00:00:00Z,2026-01-02T00:00:00Z,AWS,fixture-account,Credit,credit-1,USD,-10,-10,Credit,{}
+2026-01-02T00:00:00Z,2026-01-03T00:00:00Z,AWS,fixture-account,Storage,bucket-1,NZD,30,30,Usage,{}

@@ -1,13 +1,31 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Cloud Costs for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Cloud cost review",
+    "subtitle": "Imported snapshots. Currencies remain separate.",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Owner costs",
+        "sql": "select month,centre,owner,currency,billed_amount,effective_amount from monthly_spend order by month,centre,currency"
+      },
+      {
+        "title": "Budget exceptions",
+        "sql": "select * from budget_review where finding<>'within budget' order by month,centre"
+      },
+      {
+        "title": "Attention",
+        "sql": "select * from compliance_findings order by rule,reference"
+      }
+    ]
+  },
+  {
+    "name": "unit-economics",
+    "title": "Unit costs by owner",
+    "sections": [
+      {
+        "title": "Cost per recorded unit",
+        "sql": "select * from unit_costs order by month,centre,currency,unit",
+        "note": "Units are supplied by the operator. Currency is never converted."
       }
     ]
   }

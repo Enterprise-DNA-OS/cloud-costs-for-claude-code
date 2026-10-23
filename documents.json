@@ -1,11 +1,35 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "owner-statement",
+    "title": "Cloud cost allocation statement",
+    "for_each": "select id,name from centres order by code",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Allocated costs",
+        "sql": "select month,currency,billed_amount,effective_amount from monthly_spend where centre_id=$1 order by month,currency"
+      },
+      {
+        "title": "Budget review",
+        "sql": "select month,currency,budget_amount,actual_amount,variance_amount,finding from budget_review where centre_id=$1 order by month,currency"
+      },
+      {
+        "title": "Investigations",
+        "sql": "select code,title,owner,due_on,status,evidence from actions where centre_id=$1 order by due_on",
+        "note": "Internal review document. Not an invoice or a claim of verified savings."
+      }
+    ]
+  },
+  {
+    "name": "allocation-record",
+    "title": "Account allocation record",
+    "for_each": "select id,name from centres order by code",
+    "file": "name",
+    "sections": [
+      {
+        "title": "Agreed share",
+        "sql": "select provider,account,weight_bps,reason,updated_at from allocations where centre_id=$1 order by provider,account"
+      }
     ]
   }
 ]

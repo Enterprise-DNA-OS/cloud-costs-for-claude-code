@@ -1,43 +1,61 @@
 # Cloud Costs for Claude Code: operating instructions
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+Read the README and docs/replace-vantage.md before handling a real export. This is an internal cloud cost review desk for a trusted operator. The demo business is fictional. Use the operator supplied business identity in brand.json.
 
-## Who this is for
+## Work from evidence
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+Read records before changing them. Use the CLI for recurring work and present the resulting evidence. Never invent spend, approvals, forecast certainty or savings. Keep currencies separate and state the charge period. Billed and effective cost are different measures.
 
-Fill this in once. A worker with context knows. A worker without it guesses.
+## One route for each job
 
-## How to work
-
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
-
-## Routing table: one right way for each recurring job
-
-| When the operator asks for... | Use this |
+| Request | Recipe |
 |---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+| actions | /actions |
+| activity | /activity |
+| add | /add |
+| add action | /add-action |
+| allocate | /allocate |
+| allocation check | /allocation-check |
+| attention | /attention |
+| budget | /budget |
+| budget review | /budget-review |
+| close action | /close-action |
+| compliance | /compliance |
+| cost changes | /cost-changes |
+| credits | /credits |
+| customise | /customise |
+| docs | /docs |
+| draft owner | /draft-owner |
+| draft review | /draft-review |
+| export | /export |
+| forecast | /forecast |
+| freshness | /freshness |
+| help | /help |
+| import | /import |
+| list | /list |
+| log | /log |
+| metric | /metric |
+| new view | /new-view |
+| owner load | /owner-load |
+| set owner | /set-owner |
+| show | /show |
+| showback | /showback |
+| spend | /spend |
+| unallocated | /unallocated |
+| unit costs | /unit-costs |
+| view | /view |
+| weekly review | /weekly-review |
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+## Rules
 
-## Hard rules
+All CLI writes identify the actor. No sends, purchases, cloud-resource actions or provider credentials. Drafts stay in drafts/. Use explicit operator approval before replacing a dataset; first dry-run and reconcile. Never overwrite exports. An allocation change restates history, so preserve approved statements first. Ambiguous names require an exact code.
 
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
+The database is not a hosted multi-tenant product. Use one dedicated database with restricted operator access. The audit trail is not tamper-proof. Read docs/compliance.md for the scope of each rule. A compliance finding is a review prompt, not a certification.
 
-## Where things live
+## Files and validation
 
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off Vantage.
+scripts/costs.mjs is the one domain CLI. scripts/lib/db.mjs selects the database. supabase/migrations contains forward migrations. Never change an applied migration. views.json and documents.json declare the existing HTML renderer outputs. All agent runtimes use .claude/commands.
 
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/vantage
+Run npm test after changes. Use temporary data for tests. Never seed a real database. npm run demo is for the fictional local example. New recurring jobs get a recipe and a meaningful check in scripts/smoke.mjs.
+
+Built and run for you through Omni by Enterprise DNA: https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=vantage
